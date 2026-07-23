@@ -120,4 +120,4 @@ WebMinCer is an independent project. It is not intended to be a drop-in replacem
 My other projects
 ------------------
 
-See my [other projects](https://CodingMarkus.codeberg.org/).
+See my [other projects](https://CodingMarkus.codeberg.page/).
