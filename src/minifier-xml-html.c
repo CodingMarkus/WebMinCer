@@ -18,8 +18,7 @@ static char utf8Byte( uint_fast32_t byte )
 }
 
 static void xmlhtmlCorrectErrorPosition(
-	const char * encoded, size_t * errorPosition, bool isXml
-)
+	const char * encoded, size_t * errorPosition, bool isXml )
 {
 	size_t encodedI = 0, decodedI = 0;
 	bool inCdata = false;
@@ -108,8 +107,7 @@ static void xmlhtmlCorrectErrorPosition(
 
 
 static struct Minification xmlhtmlDecode(
-	const char * input, size_t length, bool isXml
-)
+	const char * input, size_t length, bool isXml )
 {
 	// This function helps minify inline scripts and styles in XML (e.g. SVG,
 	// MathML, XHTML) documents. We need to decode XML entities and CDATA
@@ -305,8 +303,7 @@ struct EncodedString {
 
 
 static struct EncodedString xmlEncode(
-	const char * input, const size_t inputLength
-)
+	const char * input, const size_t inputLength )
 {
 	size_t addedLengthWithCdata = sizeof "<![CDATA[]]>" - 1;
 	size_t addedLengthWithEntities = 0;
@@ -386,8 +383,7 @@ static struct EncodedString xmlEncode(
 
 
 static bool ensureResultCapacity(
-	char ** result, size_t * capacity, size_t neededLength
-)
+	char ** result, size_t * capacity, size_t neededLength )
 {
 	if (neededLength + 1 <= *capacity) {
 		return (true);
@@ -408,8 +404,7 @@ static bool ensureResultCapacity(
 
 static void xmlhtmlCopyError(
 	struct Minification * destination, const struct Minification * source,
-	size_t positionOffset
-)
+	size_t positionOffset )
 {
 	destination->errorPosition = positionOffset + source->errorPosition;
 	memcpy(destination->error, source->error, sizeof destination->error);
@@ -417,8 +412,7 @@ static void xmlhtmlCopyError(
 
 
 static bool xmlhtmlIsEventHandlerAttribute(
-	const char * attribute, size_t attributeLength, bool isXml
-)
+	const char * attribute, size_t attributeLength, bool isXml )
 {
 	if (isXml) {
 		return (false);
@@ -533,8 +527,7 @@ static bool xmlhtmlIsJavascriptUrl( const char * value, bool isXml )
 
 
 static bool xmlhtmlMatchesName(
-	const char * value, size_t valueLength, const char * name
-)
+	const char * value, size_t valueLength, const char * name )
 {
 	return (valueLength == strlen(name) && !StrNICmp(value, name, valueLength));
 }
@@ -544,8 +537,7 @@ static bool xmlhtmlIsBooleanAttribute(
 	const char * tag,
 	size_t tagLength,
 	const char * attribute,
-	size_t attributeLength
-)
+	size_t attributeLength )
 {
 	if (xmlhtmlMatchesName(attribute, attributeLength, "autofocus")
 		|| xmlhtmlMatchesName(attribute, attributeLength, "inert")
@@ -675,8 +667,7 @@ struct EncodedAttribute {
 
 
 static struct EncodedAttribute xmlhtmlEncodeAttribute(
-	const char * input, char preferredQuote, bool isXml, bool allowUnquoted
-)
+	const char * input, char preferredQuote, bool isXml, bool allowUnquoted )
 {
 	size_t inputLength = strlen(input);
 	bool needQuotes = isXml || !allowUnquoted || inputLength == 0;
@@ -788,7 +779,7 @@ static struct Minification minifyXmlhtml( const char * xmlhtml, bool isXml )
 	size_t resultLength = 0;
 
 	while (true) {
-		// Beginning of inline minification
+		// Minify inline script or style content
 
 		const char * tagContentDelimiter = NULL;
 		struct Minification (*tagContentMinifyCallback)(const char *) = NULL;
@@ -921,7 +912,7 @@ static struct Minification minifyXmlhtml( const char * xmlhtml, bool isXml )
 			continue;
 		}
 
-		// End of inline minification
+		// Finish inline minification
 
 		if (xmlhtml[i] == '\0') {
 			if (syntaxBlock == SYNTAX_BLOCK_TAG) {
@@ -989,7 +980,7 @@ static struct Minification minifyXmlhtml( const char * xmlhtml, bool isXml )
 			continue;
 		}
 		if (xmlhtml[i] == '<') {
-			// Consume `<` and tag name
+			// Read the tag name.
 			if (syntaxBlock == SYNTAX_BLOCK_TAG) {
 				m.errorPosition = i;
 				snprintf(m.error,
@@ -1142,7 +1133,7 @@ static struct Minification minifyXmlhtml( const char * xmlhtml, bool isXml )
 			continue;
 		}
 		if (syntaxBlock == SYNTAX_BLOCK_TAG && xmlhtml[i] != '=') {
-			// Consume attribute
+			// Read the next attribute.
 			if (xmlhtml[i] == '"' || xmlhtml[i] == '\'') {
 				m.errorPosition = i;
 				snprintf(m.error,
@@ -1185,7 +1176,7 @@ static struct Minification minifyXmlhtml( const char * xmlhtml, bool isXml )
 			continue;
 		}
 		if (syntaxBlock == SYNTAX_BLOCK_TAG && xmlhtml[i] == '=') {
-			// Consume `=` followed by quoted or unquoted value
+			// Read the attribute value.
 			if (attributeLength == 0) {
 				m.errorPosition = i;
 				snprintf(
@@ -1273,7 +1264,7 @@ static struct Minification minifyXmlhtml( const char * xmlhtml, bool isXml )
 				}
 			}
 
-			// Checking script type
+			// Handle the script type attribute
 
 			struct Minification decodedValue
 				= xmlhtmlDecode(value, valueLength, false);

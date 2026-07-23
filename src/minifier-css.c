@@ -310,8 +310,7 @@ static const char * shorterColorName( const char * color, size_t colorLength )
 
 
 static void appendMinifiedColor(
-	const char * color, size_t colorLength, char * result, size_t * resultLength
-)
+	const char * color, size_t colorLength, char * result, size_t * resultLength )
 {
 	const char * colorName = shorterColorName(color, colorLength);
 	if (colorName != NULL && strlen(colorName) < colorLength + 1) {
@@ -326,8 +325,7 @@ static void appendMinifiedColor(
 
 
 static size_t minifyHexColor(
-	const char * css, size_t i, char * result, size_t * resultLength
-)
+	const char * css, size_t i, char * result, size_t * resultLength )
 {
 	size_t colorLength = 0;
 	while (isHexadecimalDigit(css[i + 1 + colorLength])) {
@@ -353,8 +351,7 @@ static size_t minifyHexColor(
 
 
 static size_t minifyColorName(
-	const char * css, size_t i, char * result, size_t * resultLength
-)
+	const char * css, size_t i, char * result, size_t * resultLength )
 {
 	size_t inputLength = 0;
 	while (isIdentifierCharacter(css[i + inputLength])) {
@@ -391,8 +388,7 @@ static bool parseColorComponent(
 	const char * css,
 	size_t * i,
 	unsigned int * component,
-	bool * isPercentage
-)
+	bool * isPercentage )
 {
 	if (!isdigit((unsigned char) css[*i])) {
 		return (false);
@@ -420,8 +416,7 @@ static bool parseColorComponent(
 
 
 static size_t minifyRGBColor(
-	const char * css, size_t i, char * result, size_t * resultLength
-)
+	const char * css, size_t i, char * result, size_t * resultLength )
 {
 	if (StrNICmp(&css[i], "rgb(", sizeof "rgb(" - 1)) {
 		return (0);
@@ -465,8 +460,7 @@ static size_t minifyRGBColor(
 
 
 static bool matchesUnit(
-	const char * css, size_t i, const char * unit
-)
+	const char * css, size_t i, const char * unit )
 {
 	for (size_t unitI = 0; unit[unitI] != '\0'; unitI += 1) {
 		if (tolower((unsigned char) css[i + unitI]) != unit[unitI]) {
@@ -485,8 +479,7 @@ static size_t minifyIntegerUnit(
 	size_t divisor,
 	const char * targetUnit,
 	char * result,
-	size_t * resultLength
-)
+	size_t * resultLength )
 {
 	if (i != 0 && isdigit(css[i - 1])) {
 		return (0);
@@ -550,8 +543,7 @@ static size_t minifyDecimalUnitToInteger(
 	size_t decimalPlaces,
 	const char * targetUnit,
 	char * result,
-	size_t * resultLength
-)
+	size_t * resultLength )
 {
 	if (i != 0 && isdigit(css[i - 1])) {
 		return (0);
@@ -652,8 +644,7 @@ static size_t minifyDecimalUnitToInteger(
 
 
 static size_t minifyMilliseconds(
-	const char * css, size_t i, char * result, size_t * resultLength
-)
+	const char * css, size_t i, char * result, size_t * resultLength )
 {
 	if (i != 0 && isdigit(css[i - 1])) {
 		return (0);
@@ -987,7 +978,7 @@ struct Minification MinifyCSS( const char * css )
 		}
 		if (css[i] == '0' && css[i + 1] == '.'
 			&& (i == 0 || css[i - 1] < '0' || css[i - 1] > '9')) {
-			// Converting for example `0.1` to `.1`
+			// Remove the leading zero from fractional values.
 			i += 1;
 			continue;
 		}

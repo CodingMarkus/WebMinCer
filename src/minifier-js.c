@@ -249,7 +249,7 @@ struct Minification MinifyJS( const char * js )
 		}
 		if (nextWordLength == sizeof "function" - 1
 			&& !strncmp(&js[i], "function", nextWordLength)) {
-			// We consume the input until `(` of the parameter list.
+			// Scan to the function parameter list.
 			//
 			// Regular functions cannot be safely replaced by arrow functions.
 			// Arrow functions cannot be used as constructors: `new
@@ -568,7 +568,7 @@ struct Minification MinifyJS( const char * js )
 			&& (IsJSRegexStart(m.result, resultLength)
 				|| (m.result[resultLength - 1] == ' '
 					&& m.result[resultLength - 2] == '<'))) {
-			// This is a regex object.
+		// Parse a regular expression literal.
 
 			size_t regexStartI = i;
 			m.result[resultLength++] = '/';
@@ -698,7 +698,7 @@ struct Minification MinifyJS( const char * js )
 			}
 
 			JS_SKIP_WHITESPACES_COMMENTS(js, &i, m.result, &resultLength);
-			i += 1; // Skipping the plus character
+			i += 1; // Skip the plus character
 			JS_SKIP_WHITESPACES_COMMENTS(js, &i, m.result, &resultLength);
 
 			goto mergeStrings;
@@ -806,7 +806,7 @@ struct Minification MinifyJS( const char * js )
 					continue;
 				}
 
-				// Standalone lines may start with: +-~!"'`/ and more
+				// Preserve newlines before tokens that can start a statement.
 
 				const char trimNewlineBefore[] = ")]}.;=*^?:,><|&";
 				if (strchr(trimNewlineBefore, js[i]) == NULL) {

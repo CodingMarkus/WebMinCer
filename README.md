@@ -115,3 +115,9 @@ WebMinCer started as a fork of [cminify](https://codeberg.org/Jumping-Beaver/cmi
 We are grateful to Jumping-Beaver for the substantial work that made this project possible. WebMinCer builds on that foundation, while its goals may differ slightly from those of cminify and it is intended to be developed more actively.
 
 WebMinCer is an independent project. It is not intended to be a drop-in replacement for cminify, and its goal is not to push changes back into cminify. Users should therefore review the behavior and goals of WebMinCer before adopting it in place of cminify.
+
+
+My other projects
+------------------
+
+See my [other projects](https://CodingMarkus.codeberg.org/).

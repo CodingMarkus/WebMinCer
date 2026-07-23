@@ -152,8 +152,7 @@ struct LineColumn {
 };
 
 static struct LineColumn positionToLineColumn(
-	const char * text, size_t position
-)
+	const char * text, size_t position )
 {
 	struct LineColumn lc = {.line = 1, .column = 0};
 	for (size_t i = 0; i <= position; ++i) {

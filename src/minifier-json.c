@@ -61,8 +61,7 @@ static bool isUnicodeEscape( const char * escape )
 
 
 static size_t appendShortenedUnicodeEscape(
-	const char * escape, char * result, size_t * resultLength
-)
+	const char * escape, char * result, size_t * resultLength )
 {
 	unsigned int codepoint = unicodeEscapeCodepoint(escape);
 	char escapedCharacter = '\0';

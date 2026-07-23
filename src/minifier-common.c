@@ -18,8 +18,7 @@ bool IsWhitespace( const char c )
 
 bool SkipWhitespacesComments(
 	struct Minification * m, const char * input, size_t * i, char * min,
-	size_t * minLength, enum CommentVariant commentVariant
-)
+	size_t * minLength, enum CommentVariant commentVariant )
 {
 	bool skippedAllComments = true;
 	do {
