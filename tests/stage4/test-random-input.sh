@@ -2,7 +2,7 @@
 
 set -eu
 
-. test/lib/lib-output.sh
+. tests/lib/lib-output.sh
 
 export LC_CTYPE=C
 export LC_ALL=C

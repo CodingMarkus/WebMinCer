@@ -2,7 +2,7 @@
 
 set -eu
 
-. test/lib/lib-output.sh
+. tests/lib/lib-output.sh
 
 [ -n "${__included_test_assert_sh:-}" ] && return 0
 __included_test_assert_sh=1

@@ -12,10 +12,10 @@ archiveBinDir="$archiveDir/bin"
 archiveDevDir="$archiveDir/dev"
 buildDir="$deployDir/build"
 licenseFile=$(pwd)/LICENSE
-testScripts='test/stage1/test-build.sh test/stage1/test-cli.sh \
-	test/stage2/test-css.sh test/stage2/test-html.sh \
-	test/stage2/test-js-mangling.sh test/stage2/test-js.sh \
-	test/stage2/test-json.sh test/stage2/test-xml.sh'
+testScripts='tests/stage1/test-build.sh tests/stage1/test-cli.sh \
+	tests/stage2/test-css.sh tests/stage2/test-html.sh \
+	tests/stage2/test-js-mangling.sh tests/stage2/test-js.sh \
+	tests/stage2/test-json.sh tests/stage2/test-xml.sh'
 version=$(make --no-print-directory --silent version)
 
 case "$version" in

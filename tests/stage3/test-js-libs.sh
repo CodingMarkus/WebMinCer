@@ -2,7 +2,7 @@
 
 set -eu
 
-. test/lib/lib-output.sh
+. tests/lib/lib-output.sh
 
 binaryPath=${WEBMINCER_BINARY:-./.build/webmincer}
 benchmark=0
