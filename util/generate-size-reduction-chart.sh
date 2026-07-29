@@ -37,9 +37,10 @@ awk -f - "$sizeReductionDocument" > "$outputImage" <<'AWK'
 		print "<svg xmlns='http://www.w3.org/2000/svg' width='" \
 			width "' height='" height "' viewBox='0 0 " \
 			width " " height "'>"
-		print "<rect width='100%' height='100%' fill='#ffffff'/>"
 		print "<style>text{font-family:-apple-system,BlinkMacSystemFont," \
-			"'Segoe UI',sans-serif;fill:#202124}</style>"
+			"'Segoe UI',sans-serif;fill:#202124}.grid{stroke:#d8d8d8}" \
+			"@media (prefers-color-scheme:dark){text{fill:#e6edf3}" \
+			".grid{stroke:#484f58}}</style>"
 		print "<text x='50' y='48' font-size='28' " \
 			"font-weight='600'>JavaScript library benchmark: output size" \
 			"</text>"
@@ -49,7 +50,7 @@ awk -f - "$sizeReductionDocument" > "$outputImage" <<'AWK'
 		for (tick = 0; tick <= 100; tick += 20) {
 			x = left + plotWidth * tick / 100
 			print "<line x1='" x "' y1='" top - 12 "' x2='" \
-				x "' y2='" height - 60 "' stroke='#d8d8d8'/>"
+				x "' y2='" height - 60 "' class='grid'/>"
 			print "<text x='" x "' y='" height - 35 \
 				"' font-size='15' text-anchor='middle'>" \
 				tick "%</text>"
