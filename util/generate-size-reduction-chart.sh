@@ -14,9 +14,13 @@ scriptDirectory=$(CDPATH='' cd "$(dirname "$0")" && pwd)
 projectDirectory=$(CDPATH='' cd "$scriptDirectory/.." && pwd)
 sizeReductionDocument=$projectDirectory/doc/CurrentSizeReductionBaselines.md
 assetDirectory=$projectDirectory/doc/assets
-outputImage=${1:-$assetDirectory/JavaScriptLibrarySizeReduction.svg}
+outputImage=${1:-$assetDirectory/JavaScriptLibrarySizeReduction.img/light.svg}
+chartStyle=light
+case "$outputImage" in
+	*/dark.svg) chartStyle=dark ;;
+esac
 
-awk -f - "$sizeReductionDocument" > "$outputImage" <<'AWK'
+awk -v chartStyle="$chartStyle" -f - "$sizeReductionDocument" > "$outputImage" <<'AWK'
 	/^[|] `/ {
 		split($0, fields, "|")
 		count += 1
@@ -37,10 +41,16 @@ awk -f - "$sizeReductionDocument" > "$outputImage" <<'AWK'
 		print "<svg xmlns='http://www.w3.org/2000/svg' width='" \
 			width "' height='" height "' viewBox='0 0 " \
 			width " " height "'>"
+		if (chartStyle == "dark") {
+			textColor = "#e6edf3"
+			gridColor = "#484f58"
+		} else {
+			textColor = "#202124"
+			gridColor = "#d8d8d8"
+		}
 		print "<style>text{font-family:-apple-system,BlinkMacSystemFont," \
-			"'Segoe UI',sans-serif;fill:#202124}.grid{stroke:#d8d8d8}" \
-			"@media (prefers-color-scheme:dark){text{fill:#e6edf3}" \
-			".grid{stroke:#484f58}}</style>"
+			"'Segoe UI',sans-serif;fill:" textColor "}.grid{stroke:" \
+			gridColor "}</style>"
 		print "<text x='50' y='48' font-size='28' " \
 			"font-weight='600'>JavaScript library benchmark: output size" \
 			"</text>"

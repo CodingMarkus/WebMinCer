@@ -368,13 +368,22 @@ _main( )
 			testFail 'Size-reduction benchmark differs from the baseline:\n\n%s' \
 				"$(cat "$_main_tableFile")"
 		fi
-		_main_generatedChart=$_main_tmpDir/JavaScriptLibrarySizeReduction.svg
-		util/generate-size-reduction-chart.sh "$_main_generatedChart" \
+		_main_generatedImageDirectory=$_main_tmpDir/JavaScriptLibrarySizeReduction.img
+		mkdir "$_main_generatedImageDirectory"
+		_main_generatedLightChart=$_main_generatedImageDirectory/light.svg
+		_main_generatedDarkChart=$_main_generatedImageDirectory/dark.svg
+		util/generate-size-reduction-chart.sh "$_main_generatedLightChart" \
+			> /dev/null 2> "$_main_tmpDir/chart-light.stderr" || testFail \
+			'Could not generate the light size-reduction chart:\n%s' \
+			"$(cat "$_main_tmpDir/chart-light.stderr")"
+		util/generate-size-reduction-chart.sh "$_main_generatedDarkChart" \
 			> /dev/null 2> "$_main_tmpDir/chart.stderr" || testFail \
-			'Could not generate the size-reduction chart:\n%s' \
+			'Could not generate the dark size-reduction chart:\n%s' \
 			"$(cat "$_main_tmpDir/chart.stderr")"
-		if ! cmp -s "$_main_generatedChart" \
-			doc/assets/JavaScriptLibrarySizeReduction.svg
+		if ! cmp -s "$_main_generatedLightChart" \
+			doc/assets/JavaScriptLibrarySizeReduction.img/light.svg \
+			|| ! cmp -s "$_main_generatedDarkChart" \
+			doc/assets/JavaScriptLibrarySizeReduction.img/dark.svg
 		then
 			testFail 'Size-reduction benchmark differs from the baseline:\n\n%s' \
 				"$(cat "$_main_tableFile")"

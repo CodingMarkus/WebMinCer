@@ -1,7 +1,7 @@
 Current size-reduction baselines
 ================================
 
-![Grouped bar chart of the JavaScript library benchmark](assets/JavaScriptLibrarySizeReduction.svg)
+![Grouped bar chart of the JavaScript library benchmark](assets/JavaScriptLibrarySizeReduction.img/light.svg)
 
 | Library | Original bytes | Minified bytes | Reduction | Minified and mangled bytes | Reduction |
 | --- | ---: | ---: | ---: | ---: | ---: |
