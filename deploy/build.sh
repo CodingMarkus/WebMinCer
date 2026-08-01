@@ -12,7 +12,6 @@ archiveBinDir="$archiveDir/bin"
 archiveDevDir="$archiveDir/dev"
 buildDir="$deployDir/build"
 licenseFile=$(pwd)/LICENSE
-testScripts=$(printf '%s\n' tests/stage[12]/test-*.sh)
 version=$(make --no-print-directory --silent version)
 
 case "$version" in
@@ -223,7 +222,7 @@ testStaticLinuxTarget( )
 		OUTPUT=webmincer \
 		TEST_BINARY="./$_wrapper" \
 		TEST_OBJECT_DIR="./$buildDir/$_target/obj" \
-		TEST_SCRIPTS="$testScripts" \
+		TEST_STAGES='1 2' \
 		test
 	rm "$_wrapper"
 }

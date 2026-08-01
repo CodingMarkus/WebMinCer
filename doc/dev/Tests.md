@@ -33,7 +33,7 @@ Run `make test-clean` to remove the persistent test data.
 Test stages
 -----------
 
-The Makefile discovers `test-*.sh` scripts in `tests/stage*/` and runs them in stage and filename order. Place a new test in the stage that matches its cost and diagnostic value. Use zero-padded stage names if there are ten or more stages.
+The Makefile discovers `test-*.sh` scripts in `tests/stage*/` and runs them in stage and filename order. `TEST_STAGES` limits discovery to a space-separated list of stage numbers. For example, `make TEST_STAGES='1 2' test` runs only stages 1 and 2. Place a new test in the stage that matches its cost and diagnostic value. Use zero-padded stage names if there are ten or more stages.
 
 
 ### Stage 1

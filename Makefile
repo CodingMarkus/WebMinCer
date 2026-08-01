@@ -22,7 +22,9 @@ DEBUG_OBJECT_DIR := $(DEBUG_BUILD_DIR)/obj
 
 SOURCES := $(wildcard src/*.c)
 HEADERS := $(wildcard src/*.h)
-TEST_SCRIPTS ?= $(wildcard tests/stage*/test-*.sh)
+TEST_STAGES ?= $(patsubst tests/stage%/,%,$(sort $(wildcard tests/stage*/)))
+TEST_SCRIPTS ?= $(foreach stage,$(TEST_STAGES),$(wildcard \
+	tests/stage$(stage)/test-*.sh))
 
 BUILD_OBJECTS := $(patsubst src/%.c,$(BUILD_OBJECT_DIR)/%.o,$(SOURCES))
 DEBUG_OBJECTS := $(patsubst src/%.c,$(DEBUG_OBJECT_DIR)/%.o,$(SOURCES))
