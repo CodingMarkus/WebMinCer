@@ -1,7 +1,12 @@
 Download WebMinCer
 ==================
 
-The current release is **WebMinCer 1.1**. Download the binary archive for your platform:
+The current release is **WebMinCer 1.1**.
+
+Binary archives
+---------------
+
+Download the binary archive for your platform:
 
 ### Linux
 
@@ -42,14 +47,15 @@ If macOS prevents WebMinCer from opening after you download it, see [macOS secur
   **Requirements**: Windows 10 on ARM or later.
 
 
-Preview releases and release history
-------------------------------------
+Release history
+---------------
 
 The newest release and all previous releases are available from the [authoritative releases page](https://codeberg.org/CodingMarkus/WebMinCer/releases).
 
 See the [release history](History.md) for release notes.
 
+
 Development releases
 --------------------
 
-Development archives, whose names start with `webmincer_1.1_dev`, contain pre-built binaries, debugging symbols, and build information. Download them from [Codeberg](https://codeberg.org/CodingMarkus/WebMinCer/releases).
+Development archives with names that begin with `webmincer` (lowercase) and include `dev` contain prebuilt binaries, debugging symbols, and build information.  Download them from [Codeberg](https://codeberg.org/CodingMarkus/WebMinCer/releases).
