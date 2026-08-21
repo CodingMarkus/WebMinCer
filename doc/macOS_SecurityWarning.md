@@ -3,7 +3,7 @@ How to solve macOS security warning
 
 After downloading and extracting a WebMinCer archive, macOS may prevent WebMinCer from opening and display a warning that Apple cannot verify it is free of malware.
 
-<center><img src="assets/macOS_WarningDialog.png" alt="macOS warning dialog" width="315"></center>
+<center><img src="assets/macOS_WarningDialog.img/light.png" alt="macOS warning dialog" width="356"></center>
 
 This warning is caused by macOS, not by a problem with WebMinCer. macOS adds the `com.apple.quarantine` attribute to files downloaded from the Internet and then requires you to approve them before they can run.
 
@@ -18,7 +18,7 @@ These instructions apply to macOS 13 Ventura and later. First, try to open WebMi
 
 3. Confirm that you want to open WebMinCer. You may need to enter your login password.
 
-<center><img src="assets/macOS_PrivacyAndSecurity_Override.png" alt="Privacy & Security with the Open Anyway button" width="459"></center>
+<center><img src="assets/macOS_PrivacyAndSecurity_Override.img/light.png" alt="Privacy & Security with the Open Anyway button" width="459"></center>
 
 macOS saves this approval, so you can open WebMinCer normally afterwards.
 
