@@ -5,7 +5,7 @@ After downloading and extracting a WebMinCer archive, macOS may prevent WebMinCe
 
 <center><img src="assets/macOS_WarningDialog.img/light.png" alt="macOS warning dialog" width="356"></center>
 
-This warning is caused by macOS, not by a problem with WebMinCer. macOS adds the `com.apple.quarantine` attribute to files downloaded from the Internet and then requires you to approve them before they can run.
+This warning is caused by macOS, not by an issue with WebMinCer. macOS automatically adds the com.apple.quarantine attribute to files downloaded from the Internet and requires you to explicitly approve them before they can run. This happens because WebMinCer is not notarized. WebMinCer is not notarized because it is not code-signed, as code signing for macOS requires an Apple Developer Program membership, which costs $99 per year.
 
 
 ## Solve it using System Settings
@@ -31,6 +31,15 @@ xattr -d com.apple.quarantine webmincer
 ```
 
 This removes the quarantine attribute from the extracted WebMinCer executable. You only need to do this once for each downloaded copy.
+
+
+## Download it via Terminal
+
+Using the download script to obtain WebMinCer directly via Terminal avoids that issue entirely.
+
+
+
+
 
 ## Contact Apple
 
