@@ -73,6 +73,42 @@ extractMacosSymbols( )
 }
 
 
+buildMacosUniversalTarget( )
+{
+	_targetDir=$buildDir/universal-macos
+	_binary="$_targetDir/webmincer"
+
+	mkdir -p "$_targetDir"
+	{
+		printf 'Zig version: '
+		zig version
+		printf 'Zig executable SHA-256: '
+		sha256sum "$(command -v zig)" | cut -d ' ' -f 1
+		printf 'Architectures: x86_64, arm64\n'
+	} > "$_targetDir/build-info.txt"
+	llvm-lipo -create \
+		"$buildDir/x86_64-macos/webmincer" \
+		"$buildDir/aarch64-macos/webmincer" \
+		-output "$_binary"
+}
+
+
+verifyMacosUniversalBinary( )
+{
+	_binary=$1
+	_architectures=$( llvm-lipo -archs "$_binary" )
+
+	case "$_architectures" in
+		*x86_64*arm64* | *arm64*x86_64*) ;;
+		*)
+			printf 'Missing macOS architectures in %s: %s\n' \
+				"$_binary" "$_architectures" >&2
+			exit 1
+			;;
+	esac
+}
+
+
 addMacosSecurityWarning( )
 {
 	_targetDir=$1
@@ -107,6 +143,7 @@ archiveTarget( )
 		aarch64-windows-gnu) _archiveName=Windows-arm64 ;;
 		x86_64-macos) _archiveName=macOS-x64 ;;
 		aarch64-macos) _archiveName=macOS-arm64 ;;
+		universal-macos) _archiveName=macOS-universal ;;
 		*) echo "Unsupported archive target: $_target" >&2; exit 1 ;;
 	esac
 
@@ -275,15 +312,24 @@ archiveTarget aarch64-windows-gnu
 archiveTarget aarch64-windows-gnu -dev
 
 buildTarget x86_64-macos x86_64-macos '' webmincer
+buildTarget aarch64-macos aarch64-macos '' webmincer
+
+buildMacosUniversalTarget
+verifyMacosUniversalBinary "$buildDir/universal-macos/webmincer"
+
 extractMacosSymbols "$buildDir/x86_64-macos/webmincer"
 addMacosSecurityWarning "$buildDir/x86_64-macos"
 archiveTarget x86_64-macos
 verifyMacosArchive "$archiveBinDir/WebMinCer_${version}_macOS-x64.tar.xz"
 archiveTarget x86_64-macos -dev
 
-buildTarget aarch64-macos aarch64-macos '' webmincer
 extractMacosSymbols "$buildDir/aarch64-macos/webmincer"
 addMacosSecurityWarning "$buildDir/aarch64-macos"
 archiveTarget aarch64-macos
 verifyMacosArchive "$archiveBinDir/WebMinCer_${version}_macOS-arm64.tar.xz"
 archiveTarget aarch64-macos -dev
+
+extractMacosSymbols "$buildDir/universal-macos/webmincer"
+addMacosSecurityWarning "$buildDir/universal-macos"
+archiveTarget universal-macos
+verifyMacosArchive "$archiveBinDir/WebMinCer_${version}_macOS-universal.tar.xz"

@@ -25,9 +25,13 @@ to `.deploy/archives/bin/`, and developer archives are written to
 
 - `x86_64-macos` and `aarch64-macos`
 
+- `universal-macos`, containing both x86_64 and arm64 Mach-O slices
+
+There is no developer archive for `universal-macos`, because the existing architecture-specific developer archives provide the required debugging data already.
+
 Linux musl releases are statically linked. Linux GNU releases are dynamically linked against glibc. Windows releases use the GNU Windows target supplied by Zig.
 
-Binary archives use friendly names such as `WebMinCer_1.0_Linux-x64.tar.xz` and `WebMinCer_1.0_Windows-arm64.zip`. Static Linux builds add the `-static` suffix. Developer archives use names such as `webmincer_1.0_dev_x86_64-linux-gnu.tar.xz`. The version always includes major and minor numbers, and includes a bugfix number only when it is non-zero. Each target directory contains the release binary, its separate debugging symbols, a `build-info.txt` file, and an `obj/` directory with build object files. Linux and macOS archives use the `.tar.xz` format. Windows archives use the `.zip` format. Archives exclude `obj/`. Binary archives contain the release binary and a copy of `LICENSE`. Developer archives include the release binary, debugging symbols, build information, and a copy of `LICENSE`.
+Binary archives use friendly names such as `WebMinCer_1.0_Linux-x64.tar.xz` and `WebMinCer_1.0_Windows-arm64.zip`. The universal macOS archive is named `WebMinCer_1.0_macOS-universal.tar.xz`. Static Linux builds add the `-static` suffix. Developer archives use names such as `webmincer_1.0_dev_x86_64-linux-gnu.tar.xz`. The version always includes major and minor numbers, and includes a bugfix number only when it is non-zero. Each target directory contains the release binary, its separate debugging symbols, a `build-info.txt` file, and an `obj/` directory with build object files. Linux and macOS archives use the `.tar.xz` format. Windows archives use the `.zip` format. Archives exclude `obj/`. Binary archives contain the release binary and a copy of `LICENSE`. Developer archives include the release binary, debugging symbols, build information, and a copy of `LICENSE`.
 
 ELF releases use `.debug` files and GNU debug links. macOS releases use a `.dSYM` bundle. Windows releases use both `.debug` files and PDB files.
 
