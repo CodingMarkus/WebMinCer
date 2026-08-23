@@ -13,6 +13,21 @@ archiveDevDir="$archiveDir/dev"
 buildDir="$deployDir/build"
 licenseFile=$(pwd)/LICENSE
 version=$(make --no-print-directory --silent version)
+buildCflags='-Os -g -ffunction-sections -fdata-sections'
+
+llvmLipo=$(command -v llvm-lipo 2>/dev/null || :)
+if [ -z "$llvmLipo" ]; then
+	for llvmLipoCandidate in /usr/bin/llvm-lipo-*; do
+		if [ -x "$llvmLipoCandidate" ]; then
+			llvmLipo=$llvmLipoCandidate
+			break
+		fi
+	done
+fi
+if [ -z "$llvmLipo" ]; then
+	printf 'Unable to find llvm-lipo\n' >&2
+	exit 1
+fi
 
 case "$version" in
 	*.*.*.* | *..* | .* | *.)
@@ -47,6 +62,7 @@ buildTarget( )
 	make \
 		BUILD_DIR="$_targetDir" \
 		CC="zig cc -target $_zigTarget" \
+		BUILD_CFLAGS="$buildCflags" \
 		LDFLAGS="$_linkFlags" \
 		OUTPUT="$_output" \
 		build
@@ -86,7 +102,7 @@ buildMacosUniversalTarget( )
 		sha256sum "$(command -v zig)" | cut -d ' ' -f 1
 		printf 'Architectures: x86_64, arm64\n'
 	} > "$_targetDir/build-info.txt"
-	llvm-lipo -create \
+	"$llvmLipo" -create \
 		"$buildDir/x86_64-macos/webmincer" \
 		"$buildDir/aarch64-macos/webmincer" \
 		-output "$_binary"
@@ -96,7 +112,7 @@ buildMacosUniversalTarget( )
 verifyMacosUniversalBinary( )
 {
 	_binary=$1
-	_architectures=$( llvm-lipo -archs "$_binary" )
+	_architectures=$( "$llvmLipo" -archs "$_binary" )
 
 	case "$_architectures" in
 		*x86_64*arm64* | *arm64*x86_64*) ;;
@@ -268,51 +284,61 @@ testStaticLinuxTarget( )
 rm -rf "$deployDir"
 mkdir -p "$archiveBinDir" "$archiveDevDir" "$buildDir"
 
-buildTarget i686-linux-musl x86-linux-musl -static webmincer
+buildTarget i686-linux-musl x86-linux-musl \
+	'-static -Wl,--gc-sections' webmincer
 extractLinuxSymbols "$buildDir/i686-linux-musl/webmincer"
 testStaticLinuxTarget i686-linux-musl qemu-i386
 archiveTarget i686-linux-musl
 archiveTarget i686-linux-musl -dev
 
-buildTarget i686-linux-gnu x86-linux-gnu '' webmincer
+buildTarget i686-linux-gnu x86-linux-gnu \
+	'-Wl,--gc-sections' webmincer
 extractLinuxSymbols "$buildDir/i686-linux-gnu/webmincer"
 archiveTarget i686-linux-gnu
 archiveTarget i686-linux-gnu -dev
 
-buildTarget x86_64-linux-musl x86_64-linux-musl -static webmincer
+buildTarget x86_64-linux-musl x86_64-linux-musl \
+	'-static -Wl,--gc-sections' webmincer
 extractLinuxSymbols "$buildDir/x86_64-linux-musl/webmincer"
 testStaticLinuxTarget x86_64-linux-musl qemu-x86_64
 archiveTarget x86_64-linux-musl
 archiveTarget x86_64-linux-musl -dev
 
-buildTarget x86_64-linux-gnu x86_64-linux-gnu '' webmincer
+buildTarget x86_64-linux-gnu x86_64-linux-gnu \
+	'-Wl,--gc-sections' webmincer
 extractLinuxSymbols "$buildDir/x86_64-linux-gnu/webmincer"
 archiveTarget x86_64-linux-gnu
 archiveTarget x86_64-linux-gnu -dev
 
-buildTarget aarch64-linux-musl aarch64-linux-musl -static webmincer
+buildTarget aarch64-linux-musl aarch64-linux-musl \
+	'-static -Wl,--gc-sections' webmincer
 extractLinuxSymbols "$buildDir/aarch64-linux-musl/webmincer"
 testStaticLinuxTarget aarch64-linux-musl qemu-aarch64
 archiveTarget aarch64-linux-musl
 archiveTarget aarch64-linux-musl -dev
 
-buildTarget aarch64-linux-gnu aarch64-linux-gnu '' webmincer
+buildTarget aarch64-linux-gnu aarch64-linux-gnu \
+	'-Wl,--gc-sections' webmincer
 extractLinuxSymbols "$buildDir/aarch64-linux-gnu/webmincer"
 archiveTarget aarch64-linux-gnu
 archiveTarget aarch64-linux-gnu -dev
 
-buildTarget x86_64-windows-gnu x86_64-windows-gnu '' webmincer.exe
+buildTarget x86_64-windows-gnu x86_64-windows-gnu \
+	'-Wl,--gc-sections' webmincer.exe
 extractWindowsSymbols "$buildDir/x86_64-windows-gnu/webmincer.exe"
 archiveTarget x86_64-windows-gnu
 archiveTarget x86_64-windows-gnu -dev
 
-buildTarget aarch64-windows-gnu aarch64-windows-gnu '' webmincer.exe
+buildTarget aarch64-windows-gnu aarch64-windows-gnu \
+	'-Wl,--gc-sections' webmincer.exe
 extractWindowsSymbols "$buildDir/aarch64-windows-gnu/webmincer.exe"
 archiveTarget aarch64-windows-gnu
 archiveTarget aarch64-windows-gnu -dev
 
-buildTarget x86_64-macos x86_64-macos '' webmincer
-buildTarget aarch64-macos aarch64-macos '' webmincer
+buildTarget x86_64-macos x86_64-macos \
+	'-Wl,-dead_strip' webmincer
+buildTarget aarch64-macos aarch64-macos \
+	'-Wl,-dead_strip' webmincer
 
 buildMacosUniversalTarget
 verifyMacosUniversalBinary "$buildDir/universal-macos/webmincer"

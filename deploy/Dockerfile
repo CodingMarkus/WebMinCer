@@ -19,6 +19,8 @@ RUN apt-get update \
 		xz-utils \
 	&& rm -rf /var/lib/apt/lists/*
 
+RUN ln --symbolic "$(command -v llvm-lipo-19)" /usr/local/bin/lipo
+
 RUN case "${TARGETARCH}" in \
 	amd64) zigArch=x86_64 ;; \
 	arm64) zigArch=aarch64 ;; \
