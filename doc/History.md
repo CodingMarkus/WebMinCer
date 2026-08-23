@@ -1,6 +1,17 @@
 Release History
 ===============
 
+## [WebMinCer 1.1.1](https://codeberg.org/CodingMarkus/WebMinCer/releases/tag/release/1.1.1) (2026-08-23)
+
+### Easier downloads and smaller binaries
+
+#### What's new?
+
+- Universal macOS archives for Intel and Apple silicon.
+- A scripted download option for macOS.
+
+
+
 ## [WebMinCer 1.1](https://codeberg.org/CodingMarkus/WebMinCer/releases/tag/release/1.1) (2026-07-22)
 
 ### Even smaller output
