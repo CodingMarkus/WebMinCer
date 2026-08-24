@@ -38,7 +38,6 @@ Depending on your version of macOS, WebMinCer may not open after you download it
   curl -fsSL https://CodingMarkus.codeberg.page/WebMinCer/download/macos | sh
   ```
 
-
 - [macOS (Intel)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1.1/WebMinCer_1.1.1_macOS_x86_64.tar.xz) (39 kB) \
    **Requirements**: macOS 13 Ventura or later on a 64-bit Intel Mac.
 

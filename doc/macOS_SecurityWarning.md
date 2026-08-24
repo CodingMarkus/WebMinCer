@@ -46,6 +46,7 @@ Using the download script to obtain WebMinCer directly via Terminal avoids that 
 ```
 
 
-## Contact Apple
+Contact Apple
+-------------
 
 If you think this is an unnecessarily difficult experience, please [contact Apple Support](https://support.apple.com/contact) and let Apple know.

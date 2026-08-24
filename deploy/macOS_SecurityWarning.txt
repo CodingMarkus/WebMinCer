@@ -1,7 +1,7 @@
 How to solve a macOS security warning
 =====================================
 
-After downloading and extracting a WebMinCer archive, macOS may prevent
+After downloading and extracting this WebMinCer archive, macOS may prevent
 WebMinCer from opening and display a warning that Apple cannot verify that it
 is free of malware.
 
