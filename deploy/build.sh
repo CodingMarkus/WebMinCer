@@ -16,15 +16,18 @@ version=$(make --no-print-directory --silent version)
 buildCflags='-Os -g -ffunction-sections -fdata-sections'
 
 llvmLipo=$(command -v llvm-lipo 2>/dev/null || :)
-if [ -z "$llvmLipo" ]; then
+if [ -z "$llvmLipo" ]
+then
 	for llvmLipoCandidate in /usr/bin/llvm-lipo-*; do
-		if [ -x "$llvmLipoCandidate" ]; then
+		if [ -x "$llvmLipoCandidate" ]
+		then
 			llvmLipo=$llvmLipoCandidate
 			break
 		fi
 	done
 fi
-if [ -z "$llvmLipo" ]; then
+if [ -z "$llvmLipo" ]
+then
 	printf 'Unable to find llvm-lipo\n' >&2
 	exit 1
 fi
@@ -35,7 +38,8 @@ case "$version" in
 		exit 1
 		;;
 	*.*.*)
-		if [ "${version##*.}" -eq 0 ]; then
+		if [ "${version##*.}" -eq 0 ]
+		then
 			version=${version%.*}
 		fi
 		;;
@@ -149,23 +153,57 @@ archiveTarget( )
 	_devSuffix=${2-}
 
 	case "$_target" in
-		i686-linux-gnu) _archiveName=Linux-x86 ;;
-		i686-linux-musl) _archiveName=Linux-x86-static ;;
-		x86_64-linux-gnu) _archiveName=Linux-x64 ;;
-		x86_64-linux-musl) _archiveName=Linux-x64-static ;;
-		aarch64-linux-gnu) _archiveName=Linux-arm64 ;;
-		aarch64-linux-musl) _archiveName=Linux-arm64-static ;;
-		x86_64-windows-gnu) _archiveName=Windows-x64 ;;
-		aarch64-windows-gnu) _archiveName=Windows-arm64 ;;
-		x86_64-macos) _archiveName=macOS-x64 ;;
-		aarch64-macos) _archiveName=macOS-arm64 ;;
-		universal-macos) _archiveName=macOS-universal ;;
+		i686-linux-gnu)
+			_archiveName=Linux_x86
+			_devTarget=x86-linux-gnu
+			;;
+		i686-linux-musl)
+			_archiveName=Linux_x86-static
+			_devTarget=x86-linux-musl-static
+			;;
+		x86_64-linux-gnu)
+			_archiveName=Linux_x86_64
+			_devTarget=x86_64-linux-gnu
+			;;
+		x86_64-linux-musl)
+			_archiveName=Linux_x86_64-static
+			_devTarget=x86_64-linux-musl-static
+			;;
+		aarch64-linux-gnu)
+			_archiveName=Linux_aarch64
+			_devTarget=aarch64-linux-gnu
+			;;
+		aarch64-linux-musl)
+			_archiveName=Linux_aarch64-static
+			_devTarget=aarch64-linux-musl-static
+			;;
+		x86_64-windows-gnu)
+			_archiveName=Windows_x86_64
+			_devTarget=x86_64-windows-gnu
+			;;
+		aarch64-windows-gnu)
+			_archiveName=Windows_aarch64
+			_devTarget=aarch64-windows-gnu
+			;;
+		x86_64-macos)
+			_archiveName=macOS_x86_64
+			_devTarget=x86_64-macos
+			;;
+		aarch64-macos)
+			_archiveName=macOS_aarch64
+			_devTarget=aarch64-macos
+			;;
+		universal-macos)
+			_archiveName=macOS_universal
+			_devTarget=universal-macos
+			;;
 		*) echo "Unsupported archive target: $_target" >&2; exit 1 ;;
 	esac
 
-	if [ -n "$_devSuffix" ]; then
+	if [ -n "$_devSuffix" ]
+	then
 		_archiveContents=$_target
-		_archiveName="webmincer_${version}_dev_${_target}"
+		_archiveName="webmincer_dev_${version}_${_devTarget}"
 		_archiveSubdir=dev
 		cp "$licenseFile" "$buildDir/LICENSE"
 	else
@@ -181,10 +219,12 @@ archiveTarget( )
 
 	case "$_target" in
 		*-windows-*)
-			if [ -z "$_devSuffix" ]; then
+			if [ -z "$_devSuffix" ]
+			then
 				_archiveContents="$_target/webmincer.exe"
 			fi
-			if [ -n "$_devSuffix" ]; then
+			if [ -n "$_devSuffix" ]
+			then
 				(
 					cd "$buildDir"
 					rm -f "../archives/$_archiveSubdir/$_archiveName.zip"
@@ -204,7 +244,8 @@ archiveTarget( )
 			fi
 			;;
 		*)
-			if [ -n "$_devSuffix" ]; then
+			if [ -n "$_devSuffix" ]
+			then
 				(
 					cd "$buildDir"
 					rm -f "../archives/$_archiveSubdir/$_archiveName.tar.xz"
@@ -346,16 +387,17 @@ verifyMacosUniversalBinary "$buildDir/universal-macos/webmincer"
 extractMacosSymbols "$buildDir/x86_64-macos/webmincer"
 addMacosSecurityWarning "$buildDir/x86_64-macos"
 archiveTarget x86_64-macos
-verifyMacosArchive "$archiveBinDir/WebMinCer_${version}_macOS-x64.tar.xz"
+verifyMacosArchive "$archiveBinDir/WebMinCer_${version}_macOS_x86_64.tar.xz"
 archiveTarget x86_64-macos -dev
 
 extractMacosSymbols "$buildDir/aarch64-macos/webmincer"
 addMacosSecurityWarning "$buildDir/aarch64-macos"
 archiveTarget aarch64-macos
-verifyMacosArchive "$archiveBinDir/WebMinCer_${version}_macOS-arm64.tar.xz"
+verifyMacosArchive "$archiveBinDir/WebMinCer_${version}_macOS_aarch64.tar.xz"
 archiveTarget aarch64-macos -dev
 
 extractMacosSymbols "$buildDir/universal-macos/webmincer"
 addMacosSecurityWarning "$buildDir/universal-macos"
 archiveTarget universal-macos
-verifyMacosArchive "$archiveBinDir/WebMinCer_${version}_macOS-universal.tar.xz"
+verifyMacosArchive "$archiveBinDir/WebMinCer_${version}_macOS_universal.tar.xz"
+archiveTarget universal-macos -dev

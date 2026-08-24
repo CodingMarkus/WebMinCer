@@ -107,6 +107,14 @@ deploy:
 	docker build -t $(DEPLOY_IMAGE) -f deploy/Dockerfile deploy
 	docker run --rm -v "$(CURDIR):/proj" -w /proj $(DEPLOY_IMAGE) \
 		deploy/build.sh
+	@printf '\n'
+	@if [ -t 1 ] && [ "$$TERM" != dumb ]; \
+	then \
+		printf '\033[32mDeployment succeeded.\033[0m\n'; \
+	else \
+		printf 'Deployment succeeded.\n'; \
+	fi
+	@printf '\n'
 
 
 

@@ -28,7 +28,16 @@ Download the binary archive for your platform:
 - [Linux ARM64 (static)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1/WebMinCer_1.1_Linux-arm64-static.tar.xz) (56 kB) \
    **Requirements**: 64-bit ARM Linux. No system glibc is required.
 
+
 ### macOS
+
+Depending on your version of macOS, WebMinCer may not open after you download it. See [macOS security warning](macOS_SecurityWarning.md) for instructions on how to fix this. To avoid this problem in the first place, you can download WebMinCer via Terminal.
+
+- Download via Terminal. Copy and paste the following command into a Terminal window, then press Return.
+  ```
+  curl -fsSL https://CodingMarkus.codeberg.page/WebMinCer/download/macos | sh
+  ```
+
 
 - [macOS (Intel)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1/WebMinCer_1.1_macOS-x64.tar.xz) (39 kB) \
    **Requirements**: macOS 13 Ventura or later on a 64-bit Intel Mac.
@@ -36,11 +45,6 @@ Download the binary archive for your platform:
 - [macOS (Apple silicon)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1/WebMinCer_1.1_macOS-arm64.tar.xz) (37 kB) \
    **Requirements**: macOS 13 Ventura or later on an Apple silicon Mac.
 
-If macOS prevents WebMinCer from opening after you download it, see [macOS security warning](macOS_SecurityWarning.md). Alternatively, you can download WebMinCer directly from Terminal, which avoids this problem entirely. Just copy and paste the following command into a Terminal window and press Return:
-
-```
- curl -fsSL https://CodingMarkus.codeberg.page/WebMinCer/download/macos | sh
-```
 
 ### Windows
 

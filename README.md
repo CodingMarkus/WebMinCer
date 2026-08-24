@@ -88,23 +88,25 @@ Pre-built releases
 
 Pre-built releases are available from the [Codeberg release page](https://codeberg.org/CodingMarkus/WebMinCer/releases). Download the binary archive for your operating system and processor architecture.
 
-- Linux x86: 32-bit i686. Download `WebMinCer_1.0_Linux-x86.tar.xz`, or `WebMinCer_1.0_Linux-x86-static.tar.xz` for a self-contained build.
+- Linux x86: 32-bit i686. Download `WebMinCer_1.0_Linux_x86.tar.xz`, or `WebMinCer_1.0_Linux_x86-static.tar.xz` for a self-contained build.
 
-- Linux x64: 64-bit x86_64. Download `WebMinCer_1.0_Linux-x64.tar.xz`, or `WebMinCer_1.0_Linux-x64-static.tar.xz` for a self-contained build.
+- Linux x64: 64-bit x86_64. Download `WebMinCer_1.0_Linux_x86_64.tar.xz`, or `WebMinCer_1.0_Linux_x86_64-static.tar.xz` for a self-contained build.
 
-- Linux arm64: 64-bit ARM. Download `WebMinCer_1.0_Linux-arm64.tar.xz`, or `WebMinCer_1.0_Linux-arm64-static.tar.xz` for a self-contained build.
+- Linux arm64: 64-bit ARM. Download `WebMinCer_1.0_Linux_aarch64.tar.xz`, or `WebMinCer_1.0_Linux_aarch64-static.tar.xz` for a self-contained build.
 
-- macOS x64: Intel Macs. Download `WebMinCer_1.0_macOS-x64.tar.xz`.
+- macOS x64: Intel Macs. Download `WebMinCer_1.0_macOS_x86_64.tar.xz`.
 
-- macOS arm64: Apple silicon Macs. Download `WebMinCer_1.0_macOS-arm64.tar.xz`.
+- macOS arm64: Apple silicon Macs. Download `WebMinCer_1.0_macOS_aarch64.tar.xz`.
 
-- Windows x64: 64-bit x86_64 systems. Download `WebMinCer_1.0_Windows-x64.zip`.
+- macOS universal: Intel and Apple silicon Macs. Download `WebMinCer_1.0_macOS_universal.tar.xz`.
 
-- Windows arm64: 64-bit ARM systems. Download `WebMinCer_1.0_Windows-arm64.zip`.
+- Windows x64: 64-bit x86_64 systems. Download `WebMinCer_1.0_Windows_x86_64.zip`.
+
+- Windows arm64: 64-bit ARM systems. Download `WebMinCer_1.0_Windows_aarch64.zip`.
 
 Linux and macOS archives use the `.tar.xz` format. Windows archives use the `.zip` format. Binary archives contain the release binary and a copy of `LICENSE`. Static Linux archives have `-static` in their names and do not require a system glibc installation.
 
-Developer archives have names such as `webmincer_1.0_dev_x86_64-linux-gnu.tar.xz`. They include the release binary, debugging symbols, build information, and a copy of `LICENSE` for developers who need them.
+Developer archives have names such as `webmincer_dev_1.0_x86_64-linux-gnu.tar.xz`. They include the release binary, debugging symbols, build information, and a copy of `LICENSE` for developers who need them.
 
 
 Origins and relationship to cminify
@@ -120,4 +122,4 @@ WebMinCer is an independent project. It is not intended to be a drop-in replacem
 My other projects
 -----------------
 
-See my [other projects](https://CodingMarkus.codeberg.page/).
+See also my [other projects](https://CodingMarkus.codeberg.page/).
