@@ -1,7 +1,7 @@
 Download WebMinCer
 ==================
 
-The current release is **WebMinCer 1.1**.
+The current release is **WebMinCer 1.1.1**.
 
 Binary archives
 ---------------
@@ -10,22 +10,22 @@ Download the binary archive for your platform:
 
 ### Linux
 
-- [Linux 32-bit (x86, i686)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1/WebMinCer_1.1_Linux-x86.tar.xz) (42 kB) \
+- [Linux 32-bit (x86, i686)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1.1/WebMinCer_1.1.1_Linux_x86.tar.xz) (42 kB) \
    **Requirements**: 32-bit x86 Linux and glibc 2.34 or later. x86 means i686.
 
-- [Linux 32-bit (x86, i686, static)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1/WebMinCer_1.1_Linux-x86-static.tar.xz) (55 kB) \
+- [Linux 32-bit (x86, i686, static)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1.1/WebMinCer_1.1.1_Linux_x86-static.tar.xz) (55 kB) \
    **Requirements**: 32-bit x86 Linux. x86 means i686. No system glibc is required.
 
-- [Linux 64-bit (x64)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1/WebMinCer_1.1_Linux-x64.tar.xz) (40 kB) \
+- [Linux 64-bit (x64)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1.1/WebMinCer_1.1.1_Linux_x86_64.tar.xz) (40 kB) \
    **Requirements**: 64-bit x86 Linux and glibc 2.14 or later.
 
-- [Linux 64-bit (x64, static)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1/WebMinCer_1.1_Linux-x64-static.tar.xz) (56 kB) \
+- [Linux 64-bit (x64, static)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1.1/WebMinCer_1.1.1_Linux_x86_64-static.tar.xz) (56 kB) \
    **Requirements**: 64-bit x86 Linux. No system glibc is required.
 
-- [Linux ARM64](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1/WebMinCer_1.1_Linux-arm64.tar.xz) (36 kB) \
+- [Linux ARM64](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1.1/WebMinCer_1.1.1_Linux_aarch64.tar.xz) (36 kB) \
    **Requirements**: 64-bit ARM Linux and glibc 2.17 or later.
 
-- [Linux ARM64 (static)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1/WebMinCer_1.1_Linux-arm64-static.tar.xz) (56 kB) \
+- [Linux ARM64 (static)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1.1/WebMinCer_1.1.1_Linux_aarch64-static.tar.xz) (56 kB) \
    **Requirements**: 64-bit ARM Linux. No system glibc is required.
 
 
@@ -39,19 +39,22 @@ Depending on your version of macOS, WebMinCer may not open after you download it
   ```
 
 
-- [macOS (Intel)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1/WebMinCer_1.1_macOS-x64.tar.xz) (39 kB) \
+- [macOS (Intel)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1.1/WebMinCer_1.1.1_macOS_x86_64.tar.xz) (39 kB) \
    **Requirements**: macOS 13 Ventura or later on a 64-bit Intel Mac.
 
-- [macOS (Apple silicon)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1/WebMinCer_1.1_macOS-arm64.tar.xz) (37 kB) \
+- [macOS (Apple silicon)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1.1/WebMinCer_1.1.1_macOS_aarch64.tar.xz) (37 kB) \
    **Requirements**: macOS 13 Ventura or later on an Apple silicon Mac.
+
+- [macOS (Universal)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1.1/WebMinCer_1.1.1_macOS_universal.tar.xz) (70 kB) \
+   **Requirements**: macOS 13 Ventura or later on an Intel or Apple silicon Mac.
 
 
 ### Windows
 
-- [Windows 64-bit (x64)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1/WebMinCer_1.1_Windows-x64.zip) (118 kB) \
+- [Windows 64-bit (x64)](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1.1/WebMinCer_1.1.1_Windows_x86_64.zip) (118 kB) \
   **Requirements**: Windows 7 SP1 or later. Windows 10 and later don't need any additional installs. On Windows 7 SP1, Windows 8, and Windows 8.1, install the [Universal C Runtime update](https://support.microsoft.com/en-us/servicing/os/windows/2020/04/update-for-universal-c-runtime-in-windows) if it is not already installed.
 
-- [Windows ARM64](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1/WebMinCer_1.1_Windows-arm64.zip) (107 kB) \
+- [Windows ARM64](https://codeberg.org/CodingMarkus/WebMinCer/releases/download/release%2F1.1.1/WebMinCer_1.1.1_Windows_aarch64.zip) (107 kB) \
   **Requirements**: Windows 10 on ARM or later.
 
 
